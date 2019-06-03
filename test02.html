@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test02</title>
+    <style>
+        a {
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+
+        input {
+            width: 10rem;
+            height: 2rem;
+            border: 1px solid black;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<a href="#tom">价值观</a>
+<a href="#jim">张力</a>
+<a href="#jary">目标</a><br/>
+<input type="text" id="name" readonly/>
+<input type="text" id="text" readonly/>
+<script src="jquery.js"></script>
+<script type="text/javascript">
+    /* 监听hash改变的事件 */
+    window.addEventListener('hashchange', function () {
+        /* 将hash的值拿到 */
+        var hash = document.location.hash;
+        /* 使用switch判断hash的值是多少 */
+        switch (hash) {
+            case '#tom' :
+                $.ajax({
+                    url: './json/all_name.json',
+                    success: function (data) {
+                        $("#name").val(data[0].name);
+                        $("#text").val(data[0].text);
+                    }
+                });
+                break;
+            case '#jim' :
+                $.ajax({
+                    url: './json/all_name.json',
+                    success: function (data) {
+                        $("#name").val(data[1].name);
+                        $("#text").val(data[1].text);
+                    }
+                });
+                break;
+            case '#jary' :
+                $.ajax({
+                    url: './json/all_name.json',
+                    success: function (data) {
+                        $("#name").val(data[2].name);
+                        $("#text").val(data[2].text);
+                    }
+                });
+                break;
+            default :
+                $.ajax({
+                    url: './json/all_name.json',
+                    success: function (data) {
+                        $("#name").val(data[0].name);
+                        $("#text").val(data[0].text);
+                    }
+                });
+        }
+    });
+</script>
+</body>
+</html>
