@@ -21,9 +21,9 @@
     </style>
 </head>
 <body>
-<a href="#tom">价值观</a>
-<a href="#jim">张力</a>
-<a href="#jary">目标</a><br/>
+<a href="#coreValue">价值观</a>
+<a href="#tension">张力</a>
+<a href="#target">目标</a><br/>
 <input type="text" id="name" readonly/>
 <input type="text" id="text" readonly/>
 <script src="jquery.js"></script>
@@ -34,7 +34,7 @@
         var hash = document.location.hash;
         /* 使用switch判断hash的值是多少 */
         switch (hash) {
-            case '#tom' :
+            case '#coreValue' :
                 $.ajax({
                     url: './json/all_name.json',
                     success: function (data) {
@@ -43,7 +43,7 @@
                     }
                 });
                 break;
-            case '#jim' :
+            case '#tension' :
                 $.ajax({
                     url: './json/all_name.json',
                     success: function (data) {
@@ -52,7 +52,7 @@
                     }
                 });
                 break;
-            case '#jary' :
+            case '#target' :
                 $.ajax({
                     url: './json/all_name.json',
                     success: function (data) {
