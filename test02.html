@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>test02</title>
     <style>
-        body,html {
+        body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+            font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
             -webkit-tap-highlight-color: transparent;
@@ -40,11 +40,12 @@
 <input type="text" id="text" readonly/>
 <script src="jquery.js"></script>
 <script type="text/javascript">
-    /* 监听hash改变的事件 */
+    // 监听hash改变的事件
     window.addEventListener('hashchange', function () {
-        /* 将hash的值拿到 */
+        // 将hash的值拿到
         var hash = document.location.hash;
-        /* 使用switch判断hash的值是多少 */
+        // 使用switch判断hash的值是多少
+
         switch (hash) {
             case '#coreValue' :
                 $.ajax({
