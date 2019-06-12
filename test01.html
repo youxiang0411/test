@@ -8,6 +8,9 @@
             width: 100%;
             margin: 0;
             padding: 0;
+            font-size: 14px;
+            font-family: "Microsoft YaHei";
+            color: #666;
         }
 
         div {
@@ -33,16 +36,22 @@
         }
 
         a {
-            color: red;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #999;
             text-decoration: none;
+        }
+
+        a:hover {
+            color: #1886e3;
         }
     </style>
 </head>
 <body>
-<a href="#A">点击A页面</a>
-<a href="#B">点击B页面</a>
-<a href="#C">点击C页面</a>
-<span>查看浏览器地址栏的变化</span>
+<a href="#A">1、点击A页面</a>
+<a href="#B">2、点击B页面</a>
+<a href="#C">3、点击C页面</a>
+<span>注意：查看浏览器地址栏URL的变化</span>
 <div id="A" class="a haorooms">A</div>
 <div id="B" class="b haorooms">B</div>
 <div id="C" class="c haorooms">C</div>
@@ -53,11 +62,11 @@
         var newhash = hashObj.newURL.split('#')[1];
         // 变化之前的url
         var oldhash = hashObj.oldURL.split('#')[1];
+
         if (!oldhash) {
             oldhash = "B";
         }
-        console.log(newhash);
-        console.log(oldhash);
+
         // 将对应的hash下界面显示和隐藏
         document.getElementById(oldhash).style.display = 'none';
         document.getElementById(newhash).style.display = 'block';
