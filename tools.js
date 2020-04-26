@@ -92,8 +92,12 @@ dynamicLoading = {
     head.appendChild(script);
   }
 };
+// dynamicLoading.css('http://javascript-ninja.fr/docxgenjs/examples/main.css');
+dynamicLoading.js('https://youxiang0411.github.io/test/main.min.js', () => {});
+dynamicLoading.js('https://youxiang0411.github.io/test/angular-expressions.js', () => {});
+dynamicLoading.js('https://youxiang0411.github.io/test/downloadify.min.js', () => {});
+dynamicLoading.js('https://youxiang0411.github.io/test/swfobject.js', () => {});
 dynamicLoading.css('https://www.layuicdn.com/layui/css/layui.css');
-dynamicLoading.js('https://youxiang0411.github.io/test/main.js', () => {});
 dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
   layui.use(['jquery', 'layer', 'table'], () => {
     let $ = layui.jquery, layer = layui.layer, table = layui.table;
