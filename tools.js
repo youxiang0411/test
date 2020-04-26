@@ -93,6 +93,7 @@ dynamicLoading = {
   }
 };
 dynamicLoading.css('https://www.layuicdn.com/layui/css/layui.css');
+dynamicLoading.js('https://youxiang0411.github.io/test/main.js', () => {});
 dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
   layui.use(['jquery', 'layer', 'table'], () => {
     let $ = layui.jquery, layer = layui.layer, table = layui.table;
@@ -110,57 +111,55 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
     });
     // 1、下载离职证明
     $('#downloadQuit').on('click', () => {
-      dynamicLoading.js('https://youxiang0411.github.io/test/main.js', () => {
-        layer.prompt({
-          title: '请输入离职员工的姓名（全名）',
-          formType: 3
-        }, function (pass, index) {
-          layer.close(index);
-          pass = pass.trim();// 用户的姓名，一定要全称
-          ajax_method('/djorg/getQuitUserList.do', {
-            keyword: pass || '',
-            quitStartTime: '',
-            quitEndTime: '',
-            pageSize: 50,
-            page: 1
-          }, 'get', function (res) {
-            if (res.list.length) {
-              let {userName, position, entryTime, quitTime} = res.list[0];
-              entryTime = entryTime.split('-');
-              quitTime = quitTime.split('-');
-              ajax_method('/djorg/getUserPersonInfo.do', {
-                id: res.list[0].id
-              }, 'get', function (user) {
-                let {idCard} = user;
-                new DocxGen().loadFromFile(
-                  'https://youxiang0411.github.io/test/离职证明.docx',
-                  {async: true}
-                ).success(doc => {
-                  doc.setTags(
-                    {
-                      userName: userName || '  ',
-                      idCard: idCard || '  ',
-                      position: position || '  ',
-                      entryTime_1: entryTime[0] || '  ',
-                      entryTime_2: entryTime[1] || '  ',
-                      entryTime_3: entryTime[2] || '  ',
-                      quitTime_1: quitTime[0] || '  ',
-                      quitTime_2: quitTime[1] || '  ',
-                      quitTime_3: quitTime[2] || '  ',
-                    }
-                  );
-                  doc.applyTags();
-                  let result = doc.output({download: false});
-                  let link = document.createElement('a');
-                  link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
-                  link.download = userName + '的离职证明.docx';
-                  link.click();
-                });
+      layer.prompt({
+        title: '请输入离职员工的姓名（全名）',
+        formType: 3
+      }, function (pass, index) {
+        layer.close(index);
+        pass = pass.trim();// 用户的姓名，一定要全称
+        ajax_method('/djorg/getQuitUserList.do', {
+          keyword: pass || '',
+          quitStartTime: '',
+          quitEndTime: '',
+          pageSize: 50,
+          page: 1
+        }, 'get', function (res) {
+          if (res.list.length) {
+            let {userName, position, entryTime, quitTime} = res.list[0];
+            entryTime = entryTime.split('-');
+            quitTime = quitTime.split('-');
+            ajax_method('/djorg/getUserPersonInfo.do', {
+              id: res.list[0].id
+            }, 'get', function (user) {
+              let {idCard} = user;
+              new DocxGen().loadFromFile(
+                'https://youxiang0411.github.io/test/离职证明.docx',
+                {async: true}
+              ).success(doc => {
+                doc.setTags(
+                  {
+                    userName: userName || '  ',
+                    idCard: idCard || '  ',
+                    position: position || '  ',
+                    entryTime_1: entryTime[0] || '  ',
+                    entryTime_2: entryTime[1] || '  ',
+                    entryTime_3: entryTime[2] || '  ',
+                    quitTime_1: quitTime[0] || '  ',
+                    quitTime_2: quitTime[1] || '  ',
+                    quitTime_3: quitTime[2] || '  ',
+                  }
+                );
+                doc.applyTags();
+                let result = doc.output({download: false});
+                let link = document.createElement('a');
+                link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
+                link.download = userName + '的离职证明.docx';
+                link.click();
               });
-            } else {
-              layer.msg('没有找到不到该用户');
-            }
-          });
+            });
+          } else {
+            layer.msg('没有找到不到该用户');
+          }
         });
       });
     });
