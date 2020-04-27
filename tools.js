@@ -56,6 +56,19 @@ function dateFormat(fmt, date) {
   };
   return fmt;
 }
+function GetPercent(num, total) {
+  /// <summary>
+  /// 求百分比
+  /// </summary>
+  /// <param name="num">当前数</param>
+  /// <param name="total">总数</param>
+  num = parseFloat(num);
+  total = parseFloat(total);
+  if (isNaN(num) || isNaN(total)) {
+    return "-";
+  }
+  return total <= 0 ? "0%" : (Math.round(num / total * 10000) / 100.00)+"%";
+}
 // 动态加载js,css
 dynamicLoading = {
   css: function (path) {
@@ -340,14 +353,14 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             return prev;
           }, {});
           let userAreaTemp = Object.keys(userAreaTotal).map(item => ({
-            label: item, total: userAreaTotal[item], num: parseInt((userAreaTotal[item]/ res.list) * 100)
+            label: item, total: userAreaTotal[item], num: GetPercent(userAreaTotal[item],res.list.length)
           })).sort((a, b) => b.total - a.total);
           let userAreaHtml = '';
           userAreaTemp.map(item => {
             userAreaHtml += `
                 <tr>
                   <td>${item.label}</td>
-                  <td>${item.total}人</td>
+                  <td>${item.total}</td>
                   <td>${item.num}</td>
                 </tr>
               `;
@@ -358,7 +371,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             return prev;
           }, {});
           let userSexTemp = Object.keys(userSexTotal).map(item => ({
-            label: item, total: userSexTotal[item], num: parseInt((userSexTotal[item]/ res.list) * 100)
+            label: item, total: userSexTotal[item], num: GetPercent(userSexTotal[item],res.list.length)
           })).sort((a, b) => b.total - a.total);
           let userSexHtml = '';
           userSexTemp.map(item => {
@@ -376,7 +389,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             return prev;
           }, {});
           let userJobTemp = Object.keys(userJobTotal).map(item => ({
-            label: item, total: userJobTotal[item], num: parseInt((userJobTotal[item]/ res.list) * 100)
+            label: item, total: userJobTotal[item], num: GetPercent(userJobTotal[item],res.list.length)
           })).sort((a, b) => b.total - a.total);
           let userJobHtml = '';
           userJobTemp.map(item => {
@@ -394,7 +407,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             return prev;
           }, {});
           let centerTemp = Object.keys(centerTotal).map(item => ({
-            label: item, total: centerTotal[item], num: parseInt((centerTotal[item]/ res.list) * 100)
+            label: item, total: centerTotal[item], num: GetPercent(centerTotal[item],res.list.length)
           })).sort((a, b) => b.total - a.total);
           let centerHtml = '';
           centerTemp.map(item => {
@@ -419,9 +432,9 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>${res.list}人</td>
-                      <td>${userArr.list}人</td>
-                      <td>${quitArr.list}人</td>
+                      <td>${res.list.length}人</td>
+                      <td>${userArr.length}人</td>
+                      <td>${quitArr.length}人</td>
                     </tr>
                   </tbody>
                 </table>
