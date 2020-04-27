@@ -117,7 +117,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
     layer.open({
       title: '功能列表',
       type: 1,
-      area: ['700px', '150px'],
+      area: ['600px', '150px'],
       content:
         `
        <div style="padding: 20px;">
@@ -374,7 +374,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 <table class="layui-table">
                   <thead>
                    <tr>
-                    <th>在职员工人数</th>
+                    <th>在职员工总数</th>
                     <th>本月新入职</th>
                     <th>本月离职</th>
                    </tr>
