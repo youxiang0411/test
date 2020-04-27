@@ -315,6 +315,9 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
     // 3、人事仪表盘
     $('#dashboard').on('click', () => {
       let toMonth = dateFormat('YYYY-mm-01 00:00:00', new Date());
+      let now = new Date();
+      let endMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      endMonth = dateFormat('YYYY-mm-' + endMonth +' 23:59:59', new Date());
       let loadIndex = layer.load(1, {
         shade: [0.1,'#fff'] //0.1透明度的白色背景
       });
@@ -335,14 +338,14 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           layer.close(loadIndex);
           let quitArr = [];
           quit.list.map(item => {
-            if (new Date(item.quitTime).getTime() > new Date(toMonth).getTime()) {
+            if (new Date(item.quitTime).getTime() > new Date(toMonth).getTime() && new Date(item.quitTime).getTime() < new Date(endMonth).getTime()) {
               quitArr.push(item)
             }
           });
           // 本月新入职人数
           let userArr = [];
           res.list.map(item => {
-            if (new Date(item.userInductionTime).getTime() > new Date(toMonth).getTime()) {
+            if (new Date(item.userInductionTime).getTime() > new Date(toMonth).getTime() && new Date(item.userInductionTime).getTime() < new Date(endMonth).getTime()) {
               userArr.push(item)
             }
           });
