@@ -345,26 +345,26 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               userArr.push(item)
             }
           });
-          // 区域统计
+          // 年龄统计
           let userAgeTotal = res.list.reduce((prev, cur) => {
             if (cur.age <= 20) {
-              prev['≤20岁']++;
+              prev['≤20岁'] ? prev['≤20岁']++: prev['≤20岁'] = 1;
             } else if (cur.age > 20 && cur.age <= 30) {
-              prev['20-30岁（含）']++;
+              prev['20-30岁（含）'] ? prev['20-30岁（含）']++: prev['20-30岁（含）'] = 1;
             } else if (cur.age > 30 && cur.age <= 40) {
-              prev['30-40岁（含）']++;
+              prev['30-40岁（含）'] ? prev['30-40岁（含）']++: prev['30-40岁（含）'] = 1;
             } else if (cur.age > 40 && cur.age <= 50) {
-              prev['40-50岁（含）']++;
+              prev['40-50岁（含）'] ? prev['40-50岁（含）']++: prev['40-50岁（含）'] = 1;
             } else if (cur.age > 50 && cur.age <= 60) {
-              prev['50-60岁（含）']++;
+              prev['50-60岁（含）'] ? prev['50-60岁（含）']++: prev['50-60岁（含）'] = 1;
             } else if (cur.age > 60) {
-              prev['＞60岁']++;
+              prev['＞60岁'] ? prev['＞60岁']++: prev['＞60岁'] = 1;
             }
             return prev;
           }, {});
           let userAgeTemp = Object.keys(userAgeTotal).map(item => ({
             label: item, total: userAgeTotal[item], num: GetPercent(userAgeTotal[item],res.list.length)
-          })).sort((a, b) => b.total - a.total);
+          }));
           let userAgeHtml = '';
           userAgeTemp.map(item => {
             userAgeHtml += `
