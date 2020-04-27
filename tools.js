@@ -330,7 +330,6 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           res.list.forEach(item => {
             item.age = getAge(item.userBirthday);
           });
-          console.log(res.list);
           // 本月离职人数
           layer.close(loadIndex);
           let quitArr = [];
@@ -348,7 +347,19 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           });
           // 区域统计
           let userAgeTotal = res.list.reduce((prev, cur) => {
-
+            if (cur.age <= 20) {
+              prev['≤20岁']++;
+            } else if (cur.age > 20 && cur.age <= 30) {
+              prev['20-30岁（含）']++;
+            } else if (cur.age > 30 && cur.age <= 40) {
+              prev['30-40岁（含）']++;
+            } else if (cur.age > 40 && cur.age <= 50) {
+              prev['40-50岁（含）']++;
+            } else if (cur.age > 50 && cur.age <= 60) {
+              prev['50-60岁（含）']++;
+            } else if (cur.age > 60) {
+              prev['＞60岁']++;
+            }
             return prev;
           }, {});
           let userAgeTemp = Object.keys(userAgeTotal).map(item => ({
@@ -467,6 +478,19 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                   </thead>
                   <tbody>
                     ${userAreaHtml}
+                  </tbody>
+                </table>
+                <div>年龄分布</div>
+                <table class="layui-table">
+                  <thead>
+                   <tr>
+                    <th>年龄</th>
+                    <th>人数/人</th>
+                    <th>比例</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                    ${userAgeHtml}
                   </tbody>
                 </table>
                 <div>性别分布</div>
