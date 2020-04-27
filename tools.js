@@ -313,7 +313,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             layer.open({
               title: '统计人数',
               type: 1,
-              area: ['500px', '500px'],
+              area: ['700px', '300px'],
               content: tableContent
             });
           });
@@ -322,7 +322,10 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
     });
     // 3、人事仪表盘
     $('#dashboard').on('click', () => {
-      let toMonth = dateFormat('yyyy-mm-01 00:00:00', new Date());
+      let toMonth = dateFormat('YYYY-mm-01 00:00:00', new Date());
+      let loadIndex = layer.load(1, {
+        shade: [0.1,'#fff'] //0.1透明度的白色背景
+      });
       ajax_method('/djorg/getUserManage.do', {
         pageSize: 50000,
         page: 1
@@ -334,6 +337,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           page: 1
         }, 'get', function (quit) {
           // 本月离职人数
+          layer.close(loadIndex);
           let quitArr = [];
           quit.list.map(item => {
             if (new Date(item.quitTime).getTime() > new Date(toMonth).getTime()) {
@@ -495,7 +499,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           layer.open({
             title: '人事仪表盘',
             type: 1,
-            area: ['800px', '800px'],
+            area: ['800px', '500px'],
             content: tableContent
           });
         });
