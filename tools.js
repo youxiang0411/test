@@ -69,6 +69,53 @@ function GetPercent(num, total) {
   }
   return total <= 0 ? "0%" : (Math.round(num / total * 10000) / 100.00)+"%";
 }
+// 获取年龄
+function getAge(strAge) {
+  var birArr = strAge.split("-");
+  var birYear = birArr[0];
+  var birMonth = birArr[1];
+  var birDay = birArr[2];
+
+  d = new Date();
+  var nowYear = d.getFullYear();
+  var nowMonth = d.getMonth() + 1; //记得加1
+  var nowDay = d.getDate();
+  var returnAge;
+
+  if (birArr == null) {
+    return false
+  };
+  var d = new Date(birYear, birMonth - 1, birDay);
+  if (d.getFullYear() == birYear && (d.getMonth() + 1) == birMonth && d.getDate() == birDay) {
+    if (nowYear == birYear) {
+      returnAge = 0; //
+    } else {
+      var ageDiff = nowYear - birYear; //
+      if (ageDiff > 0) {
+        if (nowMonth == birMonth) {
+          var dayDiff = nowDay - birDay; //
+          if (dayDiff < 0) {
+            returnAge = ageDiff - 1;
+          } else {
+            returnAge = ageDiff;
+          }
+        } else {
+          var monthDiff = nowMonth - birMonth; //
+          if (monthDiff < 0) {
+            returnAge = ageDiff - 1;
+          } else {
+            returnAge = ageDiff;
+          }
+        }
+      } else {
+        return  "出生日期晚于今天，数据有误"; //返回-1 表示出生日期输入错误 晚于今天
+      }
+    }
+    return returnAge;
+  } else {
+    return ("输入的日期格式错误！");
+  }
+}
 // 动态加载js,css
 dynamicLoading = {
   css: function (path) {
@@ -280,6 +327,10 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           pageSize: 50000,
           page: 1
         }, 'get', function (quit) {
+          res.list.forEach(item => {
+            item.age = getAge(item.userBirthday);
+          });
+          console.log(res.list);
           // 本月离职人数
           layer.close(loadIndex);
           let quitArr = [];
@@ -294,6 +345,24 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             if (new Date(item.userInductionTime).getTime() > new Date(toMonth).getTime()) {
               userArr.push(item)
             }
+          });
+          // 区域统计
+          let userAgeTotal = res.list.reduce((prev, cur) => {
+
+            return prev;
+          }, {});
+          let userAgeTemp = Object.keys(userAgeTotal).map(item => ({
+            label: item, total: userAgeTotal[item], num: GetPercent(userAgeTotal[item],res.list.length)
+          })).sort((a, b) => b.total - a.total);
+          let userAgeHtml = '';
+          userAgeTemp.map(item => {
+            userAgeHtml += `
+                <tr>
+                  <td>${item.label}</td>
+                  <td>${item.total}</td>
+                  <td>${item.num}</td>
+                </tr>
+              `;
           });
           // 区域统计
           let userAreaTotal = res.list.reduce((prev, cur) => {
