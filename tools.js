@@ -109,7 +109,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         `
        <div style="padding: 20px;">
          <button id="downloadQuit" type="button" class="layui-btn layui-btn-primary">1、下载离职证明</button>
-         <button id="totalList" type="button" class="layui-btn layui-btn-primary">2、统计在职人数</button>
+         <button id="totalList" type="button" class="layui-btn layui-btn-primary">2、查询某天在职人数</button>
+         <button id="dashboard" type="button" class="layui-btn layui-btn-primary">3、人事仪表盘</button>
        </div>
       `
     });
@@ -302,6 +303,187 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               area: ['500px', '500px'],
               content: tableContent
             });
+          });
+        });
+      });
+    });
+    // 3、人事仪表盘
+    $('#dashboard').on('click', () => {
+      let toMonth = dateFormat('yyyy-mm-01 00:00:00', new Date());
+      ajax_method('/djorg/getUserManage.do', {
+        pageSize: 50000,
+        page: 1
+      }, 'get', function (res) {
+        ajax_method('/djorg/getQuitUserList.do', {
+          quitStartTime: '',
+          quitEndTime: '',
+          pageSize: 50000,
+          page: 1
+        }, 'get', function (quit) {
+          // 本月离职人数
+          let quitArr = [];
+          quit.list.map(item => {
+            if (new Date(item.quitTime).getTime() > new Date(toMonth).getTime()) {
+              quitArr.push(item)
+            }
+          });
+          // 本月新入职人数
+          let userArr = [];
+          res.list.map(item => {
+            if (new Date(item.userInductionTime).getTime() > new Date(toMonth).getTime()) {
+              userArr.push(item)
+            }
+          });
+          // 区域统计
+          let userAreaTotal = res.list.reduce((prev, cur) => {
+            prev[cur.areaName] ? prev[cur.areaName]++ : prev[cur.areaName] = 1;
+            return prev;
+          }, {});
+          let userAreaTemp = Object.keys(userAreaTotal).map(item => ({
+            label: item, total: userAreaTotal[item], num: parseInt((userAreaTotal[item]/ res.list) * 100)
+          })).sort((a, b) => b.total - a.total);
+          let userAreaHtml = '';
+          userAreaTemp.map(item => {
+            userAreaHtml += `
+                <tr>
+                  <td>${item.label}</td>
+                  <td>${item.total}人</td>
+                  <td>${item.num}</td>
+                </tr>
+              `;
+          });
+          // 性别统计
+          let userSexTotal = res.list.reduce((prev, cur) => {
+            prev[cur.userSex] ? prev[cur.userSex]++ : prev[cur.userSex] = 1;
+            return prev;
+          }, {});
+          let userSexTemp = Object.keys(userSexTotal).map(item => ({
+            label: item, total: userSexTotal[item], num: parseInt((userSexTotal[item]/ res.list) * 100)
+          })).sort((a, b) => b.total - a.total);
+          let userSexHtml = '';
+          userSexTemp.map(item => {
+            userSexHtml += `
+                <tr>
+                  <td>${item.label}</td>
+                  <td>${item.total}</td>
+                  <td>${item.num}</td>
+                </tr>
+              `;
+          });
+          // 职级统计
+          let userJobTotal = res.list.reduce((prev, cur) => {
+            prev[cur.userJob] ? prev[cur.userJob]++ : prev[cur.userJob] = 1;
+            return prev;
+          }, {});
+          let userJobTemp = Object.keys(userJobTotal).map(item => ({
+            label: item, total: userJobTotal[item], num: parseInt((userJobTotal[item]/ res.list) * 100)
+          })).sort((a, b) => b.total - a.total);
+          let userJobHtml = '';
+          userJobTemp.map(item => {
+            userJobHtml += `
+                <tr>
+                  <td>${item.label}</td>
+                  <td>${item.total}</td>
+                  <td>${item.num}</td>
+                </tr>
+              `;
+          });
+          // 中心统计
+          let centerTotal = res.list.reduce((prev, cur) => {
+            prev[cur.belongCenter] ? prev[cur.belongCenter]++ : prev[cur.belongCenter] = 1;
+            return prev;
+          }, {});
+          let centerTemp = Object.keys(centerTotal).map(item => ({
+            label: item, total: centerTotal[item], num: parseInt((centerTotal[item]/ res.list) * 100)
+          })).sort((a, b) => b.total - a.total);
+          let centerHtml = '';
+          centerTemp.map(item => {
+            centerHtml += `
+                <tr>
+                  <td>${item.label}</td>
+                  <td>${item.total}</td>
+                  <td>${item.num}</td>
+                </tr>
+              `;
+          });
+
+          let tableContent = `
+              <div style="padding: 20px;">
+                <table class="layui-table">
+                   <thead>
+                   <tr>
+                    <th>在职员工人数</th>
+                    <th>本月新入职</th>
+                    <th>本月离职</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>${res.list}人</td>
+                      <td>${userArr.list}人</td>
+                      <td>${quitArr.list}人</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div>区域分布</div>
+                <table class="layui-table">
+                  <thead>
+                   <tr>
+                    <th>区域</th>
+                    <th>人数/人</th>
+                    <th>比例</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                    ${userAreaHtml}
+                  </tbody>
+                </table>
+                <div>性别分布</div>
+                <table class="layui-table">
+                  <thead>
+                   <tr>
+                    <th>性别</th>
+                    <th>人数/人</th>
+                    <th>比例</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                    ${userSexHtml}
+                  </tbody>
+                </table>
+                <div>职级分布</div>
+                <table class="layui-table">
+                  <thead>
+                   <tr>
+                    <th>职级名称</th>
+                    <th>人数/人</th>
+                    <th>比例</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                    ${userJobHtml}
+                  </tbody>
+                </table>
+                <div>中心分布</div>
+                <table class="layui-table">
+                  <thead>
+                   <tr>
+                    <th>中心名称</th>
+                    <th>人数/人</th>
+                    <th>比例</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                    ${centerHtml}
+                  </tbody>
+                </table>
+              </div>
+            `;
+          layer.open({
+            title: '人事仪表盘',
+            type: 1,
+            area: ['800px', '800px'],
+            content: tableContent
           });
         });
       });
