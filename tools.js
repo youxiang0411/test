@@ -204,7 +204,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 doc.setTags(
                   {
                     userName: userName || '  ',
-                    sex: sex === '女' ? '女士' : sex === '男'? '先生' : '',
+                    sex: (sex === '女' ? '女士' : (sex === '男'? '先生' : '')),
                     idCard: idCard || '  ',
                     position: position || '  ',
                     entryTime_1: entryTime[0] || '  ',
