@@ -190,7 +190,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           page: 1
         }, 'get', function (res) {
           if (res.list.length) {
-            let {userName, position, entryTime, quitTime, userSex} = res.list[0];
+            let {userName, position, entryTime, quitTime, sex} = res.list[0];
             entryTime = entryTime.split('-');
             quitTime = quitTime.split('-');
             ajax_method('/djorg/getUserPersonInfo.do', {
@@ -204,7 +204,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 doc.setTags(
                   {
                     userName: userName || '  ',
-                    userSex: userSex === '女' ? '女士' : userSex === '男'? '先生' : '',
+                    sex: sex === '女' ? '女士' : sex === '男'? '先生' : '',
                     idCard: idCard || '  ',
                     position: position || '  ',
                     entryTime_1: entryTime[0] || '  ',
