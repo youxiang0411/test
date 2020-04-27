@@ -230,40 +230,6 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             quitArr.map(item => {
               // console.log(`离职——姓名：${item.userName}, 入职时间：${item.entryTime}, 离职时间：${item.quitTime}`);
             });
-            // console.log('—————————————————————————————————————————————');
-            // console.log(`总在职人数：${userArr.length}人，当天离职人数：${quitArr.length}人`);
-            // console.log(`总计：${userArr.length + quitArr.length}人`);
-
-            let areaNameTotal = userArr.reduce((prev, cur) => {
-              prev[cur.areaName] ? prev[cur.areaName]++ : prev[cur.areaName] = 1;
-              return prev;
-            }, {});
-            let areaTemp = Object.keys(areaNameTotal).map(item => ({label: item, total: areaNameTotal[item]})).sort((a, b) => b.total - a.total);
-            let areaHtml = '';
-            areaTemp.map(item => {
-              areaHtml += `
-                <tr>
-                  <td>${item.label}</td>
-                  <td>${item.total}人</td>
-                </tr>
-              `;
-            });
-
-            let departTotal = [...userArr, ...quitArr].reduce((prev, cur) => {
-              prev[cur.belongCenter] ? prev[cur.belongCenter]++ : prev[cur.belongCenter] = 1;
-              return prev;
-            }, {});
-            let temp = Object.keys(departTotal).map(item => ({label: item, total: departTotal[item]})).sort((a, b) => b.total - a.total);
-            let vhtml = '';
-            temp.map(item => {
-              vhtml += `
-                <tr>
-                  <td>${item.label}</td>
-                  <td>${item.total}人</td>
-                </tr>
-              `;
-            });
-
             let tableContent = `
               <div style="padding: 20px;">
                 <table class="layui-table">
@@ -284,34 +250,12 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                       <td>总计</td>
                       <td>${userArr.length + quitArr.length}人</td>
                     </tr>
-                    <tr>
-                      <td>男员工人数</td>
-                      <td>${userArr.filter(item => item.userSex === '男').length + quitArr.filter(item => item.sex === '男').length}人</td>
-                    </tr>
-                    <tr>
-                      <td>女员工人数</td>
-                      <td>${userArr.filter(item => item.userSex === '女').length + quitArr.filter(item => item.sex === '女').length}人</td>
-                    </tr>
-                    <tr>
-                      <td>保密人数</td>
-                      <td>${userArr.filter(item => item.userSex === '保密').length + quitArr.filter(item => item.sex === '保密').length}人</td>
-                    </tr>
-                    ${areaHtml}
-                    <tr>
-                      <td>区域总计</td>
-                      <td>${areaTemp.reduce((prev, cur) => prev + cur.total, 0)}人</td>
-                    </tr>
-                    ${vhtml}
-                    <tr>
-                      <td>部门总计</td>
-                      <td>${temp.reduce((prev, cur) => prev + cur.total, 0)}人</td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
             `;
             layer.open({
-              title: '统计人数',
+              title: '查询某天在职人数',
               type: 1,
               area: ['700px', '300px'],
               content: tableContent
