@@ -57,7 +57,7 @@ body {
     border-radius: 2px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
     background-color: #fff;
-    position: absolute;
+    /*position: absolute;*/
     top: 36px;
     left: 0;
     z-index: 999
@@ -82,7 +82,9 @@ body {
 
 .select-picker-options-list {
     width: 100%;
-    padding: 8px 0
+    padding: 8px 0;
+    height: 200px;
+    overflow: auto;
 }
 
 .select-picker-options-list-item {
