@@ -195,7 +195,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
       ajax_method('/djorg/getQuitUserList.do', {
         quitStartTime: '',
         quitEndTime: '',
-        pageSize: 50000,
+        pageSize: 100,
         page: 1
       }, 'get', function (res) {
         layer.close(loadIndex);
