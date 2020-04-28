@@ -288,7 +288,6 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                   elink.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
                   document.body.appendChild(elink);
                   elink.click();
-                  URL.revokeObjectURL(elink.href); // 释放URL 对象
                   document.body.removeChild(elink);
                 });
               });
