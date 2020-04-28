@@ -200,8 +200,9 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
       }, 'get', function (res) {
         layer.close(loadIndex);
         let quitSelect = '';
+        let quitUserList = res.list;
         res.list.map(item => {
-          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="\'\'${JSON.stringify(item)}\'\'"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
+          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="${item.id}"></td><td>${item.belongCenter}</td><td>${item.userName}</td><td>${item.quitTime}</td></tr>`;
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
@@ -216,6 +217,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               <th>是否选择</th>
               <th>中心名称</th>
               <th>姓名</th>
+              <th>离职时间</th>
              </tr>
             </thead>
             <tbody id="userTable">
@@ -228,9 +230,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             let arr = [];
             $('input[type=checkbox]').each(function () {
               if ($(this).is(':checked')) {
-                arr.push({
-                  user: $(this).attr('data-id'),
-                });
+                let item = quitUserList.find(k => k.id === $(this).attr('data-id'));
+                arr.push(item);
               }
             });
             console.log(arr);
