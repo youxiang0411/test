@@ -108,12 +108,12 @@ function getAge(strAge) {
           }
         }
       } else {
-        return  "出生日期晚于今天，数据有误"; //返回-1 表示出生日期输入错误 晚于今天
+        return  0; //返回-1 表示出生日期输入错误 晚于今天
       }
     }
     return returnAge;
   } else {
-    return ("输入的日期格式错误！");
+    return 0;
   }
 }
 // 动态加载js,css
@@ -158,6 +158,7 @@ dynamicLoading.js('https://youxiang0411.github.io/test/angular-expressions.js', 
 dynamicLoading.js('https://youxiang0411.github.io/test/downloadify.min.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/swfobject.js', () => {});
 dynamicLoading.css('https://www.layuicdn.com/layui/css/layui.css');
+dynamicLoading.css('https://youxiang0411.github.io/test/css/index.js');
 dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
   layui.use(['jquery', 'layer', 'table'], () => {
     let $ = layui.jquery, layer = layui.layer, table = layui.table;
@@ -454,13 +455,13 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
 
           let tableContent = `
               <div style="padding: 20px;">
-                <div>基本数据</div>
+                <div>员工数据</div>
                 <table class="layui-table">
                   <thead>
                    <tr>
                     <th>在职员工总数</th>
-                    <th>本月新入职</th>
-                    <th>本月离职</th>
+                    <th>本月新入职人数</th>
+                    <th>本月离职人数</th>
                    </tr>
                   </thead>
                   <tbody>
@@ -497,7 +498,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     ${userAgeHtml}
                   </tbody>
                 </table>
-                <div>性别分布</div>
+                <div>性别比例</div>
                 <table class="layui-table">
                   <thead>
                    <tr>

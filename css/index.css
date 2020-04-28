@@ -1,0 +1,16 @@
+blockquote, body, button, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
+    margin: inherit;
+    padding: inherit;
+}
+.layui-layer-title {
+    padding: 15px 80px 15px 20px;
+    height: 42px;
+    line-height: 42px;
+    border: 1px solid #ebeef5;
+    font-size: 16px;
+    color: #303133;
+    font-weight: 600;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 4px 4px 0 0;
+}
