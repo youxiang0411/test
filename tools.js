@@ -127,7 +127,7 @@ let blacklist = [
 ];
 // 黑名单部门
 let blackDepart = [
-  '5f460a37441b417295b246e00952cabb',// 苍南分公司（行政）
+  '苍南分公司（行政）',// 苍南分公司（行政）
 ];
 // 动态加载js,css
 dynamicLoading = {
@@ -388,8 +388,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             if (!quit) {
               return layer.msg('没有找到数据');
             }
-            res.list = res.list.filter(item => !blacklist.includes(item.id));
-            quit.list = quit.list.filter(item => !blacklist.includes(item.id));
+            res.list = res.list.filter(item => !blacklist.includes(item.id)).filter(k => !blackDepart.includes(k.belongCenter));
+            quit.list = quit.list.filter(item => !blacklist.includes(item.id)).filter(k => !blackDepart.includes(k.belongCenter));
             var quitArr = [];
             quit.list.map(item => {
               if (new Date(item.quitTime).getTime() < new Date(entryTime).getTime()) {
@@ -464,8 +464,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           pageSize: 50000,
           page: 1
         }, 'get', function (quit) {
-          res.list = res.list.filter(item => !blacklist.includes(item.id));
-          quit.list = quit.list.filter(item => !blacklist.includes(item.id));
+          res.list = res.list.filter(item => !blacklist.includes(item.id)).filter(k => !blackDepart.includes(k.belongCenter));
+          quit.list = quit.list.filter(item => !blacklist.includes(item.id)).filter(k => !blackDepart.includes(k.belongCenter));
           res.list.forEach(item => {
             item.age = getAge(item.userBirthday);
           });
