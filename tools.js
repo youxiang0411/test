@@ -153,10 +153,6 @@ dynamicLoading = {
   }
 };
 // dynamicLoading.css('http://javascript-ninja.fr/docxgenjs/examples/main.css');
-dynamicLoading.js('https://youxiang0411.github.io/test/jquery.js', () => {
-  dynamicLoading.css('https://youxiang0411.github.io/test/UCFORM.css', () => {});
-  dynamicLoading.js('https://youxiang0411.github.io/test/jQuery.UCSelect.js', () => {});
-});
 dynamicLoading.js('https://youxiang0411.github.io/test/main.min.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/angular-expressions.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/downloadify.min.js', () => {});
@@ -213,6 +209,11 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           <div><select id="userList">${quitSelect.join("")}</select></div>
         `
         });
+      });
+    });
+    dynamicLoading.js('https://youxiang0411.github.io/test/jquery.js', () => {
+      dynamicLoading.css('https://youxiang0411.github.io/test/UCFORM.css', () => {});
+      dynamicLoading.js('https://youxiang0411.github.io/test/jQuery.UCSelect.js', () => {
         $(function() {
           $("#userList").UCFormSelect();
         });
