@@ -217,9 +217,9 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           </div>
         `
             });
-            $(function() {
-              $("#demo2").mySelect();
-            });
+          });
+          $(function() {
+            $("#demo2").mySelect();
           });
         });
       });
