@@ -351,7 +351,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             }
           });
           // 年龄统计
-          let userAgeTotal = res.list.reduce((prev, cur) => {
+          let userAgeTotal = res.list.sort((a, b) => a.age - b.age).reduce((prev, cur) => {
             if (cur.age <= 20) {
               prev['≤20岁'] ? prev['≤20岁']++: prev['≤20岁'] = 1;
             } else if (cur.age > 20 && cur.age <= 30) {
@@ -459,7 +459,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 <li class="layui-this">员工数据</li>
                 <li>区域分布</li>
                 <li>年龄分布</li>
-                <li>性别比例</li>
+                <li>性别分布</li>
                 <li>职级分布</li>
                 <li>中心分布</li>
               </ul>
@@ -469,8 +469,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     <thead>
                      <tr>
                       <th>在职员工总数</th>
-                      <th>本月新入职人数</th>
-                      <th>本月离职人数</th>
+                      <th>本月新入职</th>
+                      <th>本月离职</th>
                      </tr>
                     </thead>
                     <tbody>

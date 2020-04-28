@@ -6,6 +6,7 @@
 }
 .layui-table th {
     color: #606266!important;
+    font-weight: 500;
 }
 .layui-table td {
     color: #303133!important;
