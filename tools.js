@@ -244,7 +244,9 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             $('input[type=checkbox]').each(function () {
               if ($(this).is(':checked')) {
                 let item = quitUserList.find(k => k.id === $(this).attr('data-id'));
-                arr.push(item);
+                if (item) {
+                  arr.push(item);
+                }
               }
             });
             console.log(arr);
