@@ -169,7 +169,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
       content:
         `
           <div class="app-list">
-            <div id="downloadQuit1" class="app-list-item">
+            <div id="downloadQuit" class="app-list-item">
               <div class="app-list-item-content">
                 <span>1、下载离职证明</span>
               </div>
@@ -201,7 +201,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         layer.close(loadIndex);
         let quitSelect = '';
         res.list.map(item => {
-          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="${JSON.stringify(item)}"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
+          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="\'\'${JSON.stringify(item)}\'\'"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
