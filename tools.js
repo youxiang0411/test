@@ -116,6 +116,19 @@ function getAge(strAge) {
     return 0;
   }
 }
+// 黑名单用户
+let blacklist = [
+  '96d66733a3794deb827d85b0b0f9b1c5',// 研发总监
+  '25594b7051534a1faab69a86e8fb9fe9',// 审计委员会
+  '547d685078794b8fae9df5506e43ce60',// 东东
+  'a65869bf63b94c94bc5eb099d62bc223',// 安委会
+  '81',// 超级管理员
+  '80dc5bd9c47e42f7b2f81e40a8b18558',// 总裁室
+];
+// 黑名单部门
+let blackDepart = [
+  '5f460a37441b417295b246e00952cabb',// 苍南分公司（行政）
+];
 // 动态加载js,css
 dynamicLoading = {
   css: function (path) {
@@ -235,6 +248,41 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               }
             });
             console.log(arr);
+            arr.forEach(item => {
+              let {userName, position, entryTime, quitTime, sex} = item;
+              entryTime = entryTime.split('-');
+              quitTime = quitTime.split('-');
+              ajax_method('/djorg/getUserPersonInfo.do', {
+                id: item.id
+              }, 'get', function (user) {
+                let {idCard} = user;
+                new DocxGen().loadFromFile(
+                  'https://youxiang0411.github.io/test/离职证明.docx',
+                  {async: true}
+                ).success(doc => {
+                  doc.setTags(
+                    {
+                      userName: userName || '  ',
+                      sex: (sex === '女' ? '女士' : (sex === '男'? '先生' : '')),
+                      idCard: idCard || '  ',
+                      position: position || '  ',
+                      entryTime_1: entryTime[0] || '  ',
+                      entryTime_2: entryTime[1] || '  ',
+                      entryTime_3: entryTime[2] || '  ',
+                      quitTime_1: quitTime[0] || '  ',
+                      quitTime_2: quitTime[1] || '  ',
+                      quitTime_3: quitTime[2] || '  ',
+                    }
+                  );
+                  doc.applyTags();
+                  let result = doc.output({download: false});
+                  let link = document.createElement('a');
+                  link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
+                  link.download = userName + '的离职证明.docx';
+                  link.click();
+                });
+              });
+            });
             layer.close(index); //如果设定了yes回调，需进行手工关闭
           }
         });
@@ -340,6 +388,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             if (!quit) {
               return layer.msg('没有找到数据');
             }
+            res.list = res.list.filter(item => !blacklist.includes(item.id));
+            quit.list = quit.list.filter(item => !blacklist.includes(item.id));
             var quitArr = [];
             quit.list.map(item => {
               if (new Date(item.quitTime).getTime() < new Date(entryTime).getTime()) {
@@ -414,6 +464,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           pageSize: 50000,
           page: 1
         }, 'get', function (quit) {
+          res.list = res.list.filter(item => !blacklist.includes(item.id));
+          quit.list = quit.list.filter(item => !blacklist.includes(item.id));
           res.list.forEach(item => {
             item.age = getAge(item.userBirthday);
           });
