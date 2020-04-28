@@ -161,7 +161,7 @@ dynamicLoading.css('https://www.layuicdn.com/layui/css/layui.css');
 dynamicLoading.css('https://youxiang0411.github.io/test/css/index.css?v=' + new Date().getTime());
 dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
   layui.use(['jquery', 'layer', 'table', 'element'], () => {
-    let $ = layui.jquery, layer = layui.layer, table = layui.table, element = layui.element;;
+    let $ = layui.jquery, layer = layui.layer, table = layui.table, element = layui.element;
     layer.open({
       title: '功能列表',
       type: 1,

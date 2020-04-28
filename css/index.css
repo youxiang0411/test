@@ -1,11 +1,17 @@
 .layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even) {
     background-color: #fafafa!important;
 }
+.layui-table th, .layui-table td {
+    border: 0;
+}
 .layui-table th {
     color: #606266!important;
 }
 .layui-table td {
     color: #303133!important;
+}
+.layui-table tr {
+    border-bottom: 1px solid #ebeef5;
 }
 .layui-layer-title {
     background-color: #fff!important;
