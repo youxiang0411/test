@@ -277,11 +277,12 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     }
                   );
                   doc.applyTags();
-                  let result = doc.output({download: false});
-                  let link = document.createElement('a');
-                  link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
-                  link.download = userName + '的离职证明.docx';
-                  link.click();
+                  // let result = doc.output({download: false});
+                  // let link = document.createElement('a');
+                  // link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
+                  // link.download = userName + '的离职证明.docx';
+                  // link.click();
+                  console.log(item);
                 });
               });
             });
