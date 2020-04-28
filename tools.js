@@ -201,21 +201,25 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         layer.close(loadIndex);
         let quitSelect = [];
         res.list.map(item => {
-          quitSelect.push(`<option value="${item.id}">${item.userName}</option>`);
+          quitSelect.push(`<tr><input type="checkbox" data-id="${item.id}"><td>${item.belongCenter}</td>${item.userName}<td></td></tr>`);
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
+          type: 1,
+          area: ['800px', '500px'],
           content: `
-          <div><select id="userList">${quitSelect.join("")}</select></div>
-        `
-        });
-      });
-    });
-    dynamicLoading.js('https://youxiang0411.github.io/test/jquery.js', () => {
-      dynamicLoading.css('https://youxiang0411.github.io/test/UCFORM.css', () => {});
-      dynamicLoading.js('https://youxiang0411.github.io/test/jQuery.UCSelect.js', () => {
-        $(function() {
-          $("#userList").UCFormSelect();
+          <table class="layui-table">
+            <thead>
+             <tr>
+              <th>中心名称</th>
+              <th>姓名</th>
+             </tr>
+            </thead>
+            <tbody>
+              ${quitSelect.join("")}
+            </tbody>
+          </table>
+          `
         });
       });
     });
