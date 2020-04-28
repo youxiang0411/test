@@ -260,7 +260,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 let {idCard} = user;
                 new DocxGen().loadFromFile(
                   'https://youxiang0411.github.io/test/离职证明.docx',
-                  {async: true}
+                  {async: false}
                 ).success(doc => {
                   doc.setTags(
                     {
@@ -277,14 +277,13 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     }
                   );
                   doc.applyTags();
-                  doc.output();
-                  // let result = doc.output({download: false});
-                  // let link = document.createElement('a');
-                  // link.id = '';
-                  // link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
-                  // link.download = userName + '的离职证明.docx';
-                  // link.click();
-                  // link.remove();
+                  let result = doc.output({download: false});
+                  let link = document.createElement('a');
+                  link.id = '';
+                  link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
+                  link.download = userName + '的离职证明.docx';
+                  link.click();
+                  link.remove();
                 });
               });
             });
