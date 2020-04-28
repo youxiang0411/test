@@ -201,7 +201,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         layer.close(loadIndex);
         let quitSelect = '';
         res.list.map(item => {
-          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="${JSON.stringify(item)}"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
+          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="\'${JSON.stringify(item)}\'"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
@@ -209,7 +209,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           area: ['800px', '500px'],
           content: `
           <div>
-          <div>搜索：<input id="searchCityName" type="text" style="padding: 5px 10px" placeholder="请输入姓名搜索"></div>
+          <div style="color: #303133;">搜索：<input id="searchCityName" type="text" style="padding: 5px 10px" placeholder="请输入姓名搜索"></div>
           <table class="layui-table">
             <thead>
              <tr>
