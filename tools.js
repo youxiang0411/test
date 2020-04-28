@@ -153,11 +153,13 @@ dynamicLoading = {
   }
 };
 // dynamicLoading.css('http://javascript-ninja.fr/docxgenjs/examples/main.css');
-
+dynamicLoading.js('https://youxiang0411.github.io/test/jquery.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/main.min.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/angular-expressions.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/downloadify.min.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/swfobject.js', () => {});
+dynamicLoading.css('https://youxiang0411.github.io/test/select/select.css', () => {});
+dynamicLoading.js('https://youxiang0411.github.io/test/select/select.js', () => {});
 dynamicLoading.css('https://www.layuicdn.com/layui/css/layui.css');
 dynamicLoading.css('https://youxiang0411.github.io/test/css/index.css?v=' + new Date().getTime());
 dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
@@ -193,34 +195,29 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
       let loadIndex = layer.load(1, {
         shade: [0.1,'#fff'] //0.1透明度的白色背景
       });
-      dynamicLoading.js('https://youxiang0411.github.io/test/jquery.js', () => {
-        dynamicLoading.css('https://youxiang0411.github.io/test/select/select.css', () => {});
-        dynamicLoading.js('https://youxiang0411.github.io/test/select/select.js', () => {
-          ajax_method('/djorg/getQuitUserList.do', {
-            quitStartTime: '',
-            quitEndTime: '',
-            pageSize: 50000,
-            page: 1
-          }, 'get', function (res) {
-            layer.close(loadIndex);
-            let quitSelect = [];
-            res.list.map(item => {
-              quitSelect.push(`<option value="${item.id}">${item.userName}</option>`);
-            });
-            layer.open({
-              title: '请选择人员（支持多选下载）',
-              content: `
+      ajax_method('/djorg/getQuitUserList.do', {
+        quitStartTime: '',
+        quitEndTime: '',
+        pageSize: 50000,
+        page: 1
+      }, 'get', function (res) {
+        layer.close(loadIndex);
+        let quitSelect = [];
+        res.list.map(item => {
+          quitSelect.push(`<option value="${item.id}">${item.userName}</option>`);
+        });
+        layer.open({
+          title: '请选择人员（支持多选下载）',
+          content: `
           <div id="demo2" class="selectPickerWrapper">
             <select class="hidden" multiple="multiple">
               ${quitSelect.join("")}
             </select>
           </div>
         `
-            });
-          });
-          $(function() {
-            $("#demo2").mySelect();
-          });
+        });
+        $(function() {
+          $("#demo2").mySelect();
         });
       });
     });
