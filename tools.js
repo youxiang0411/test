@@ -12,7 +12,7 @@ function buildParamsStr(paramsObj) {
   }
   return str.slice(1);
 }
-function ajax_method(url, data, method, success) {
+function ajax_method(url, data, method, success, async = true) {
   url = '/djintelligent' + url;
   var ajax = new XMLHttpRequest();
   if (method === 'get') {
@@ -20,10 +20,10 @@ function ajax_method(url, data, method, success) {
       var paramsStr = buildParamsStr(data);
       url = addURLParams(url, paramsStr);
     }
-    ajax.open(method, url);
+    ajax.open(method, url, async);
     ajax.send();
   } else {
-    ajax.open(method, url);
+    ajax.open(method, url, async);
     ajax.setRequestHeader("Content-type", "application/json;charset=UTF-8");
     if (data) {
       ajax.send(JSON.stringify(data));
@@ -260,7 +260,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 let {idCard} = user;
                 new DocxGen().loadFromFile(
                   'https://youxiang0411.github.io/test/离职证明.docx',
-                  {async: false}
+                  {async: true}
                 ).success(doc => {
                   doc.setTags(
                     {
@@ -279,13 +279,12 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                   doc.applyTags();
                   let result = doc.output({download: false});
                   let link = document.createElement('a');
-                  link.id = '';
                   link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
                   link.download = userName + '的离职证明.docx';
                   link.click();
                   link.remove();
                 });
-              });
+              }, false);
             });
             layer.close(index); //如果设定了yes回调，需进行手工关闭
           }
