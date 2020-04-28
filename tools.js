@@ -208,7 +208,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           type: 0,
           area: ['800px', '500px'],
           content: `
-          <div style="padding: 10px 20px;">
+          <div>
           <div>搜索：<input id="searchCityName" type="text" style="padding: 5px 10px" placeholder="请输入姓名搜索"></div>
           <table class="layui-table">
             <thead>
@@ -226,7 +226,14 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           `,
           yes: function(index, layero){
             //do something
-            console.log(1111);
+            let arr = [];
+            $('input[type=checkbox]').each(function () {
+              if ($(this).is(':checked')) {
+                arr.push($(this).attr('data-id'));
+              }
+            });
+            console.log(arr);
+
             layer.close(index); //如果设定了yes回调，需进行手工关闭
           }
         });
