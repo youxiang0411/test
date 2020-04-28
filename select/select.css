@@ -83,7 +83,7 @@ body {
 .select-picker-options-list {
     width: 100%;
     padding: 8px 0;
-    height: 200px;
+    height: 150px;
     overflow: auto;
 }
 
