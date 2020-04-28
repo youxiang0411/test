@@ -259,7 +259,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               }, 'get', function (user) {
                 let {idCard} = user;
                 new DocxGen().loadFromFile(
-                  'https://youxiang0411.github.io/test/离职证明.docx'
+                  'https://youxiang0411.github.io/test/离职证明.docx',
+                  {async: true}
                 ).success(doc => {
                   doc.setTags(
                     {
