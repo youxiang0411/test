@@ -205,7 +205,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
-          type: 1,
+          type: 0,
           area: ['800px', '500px'],
           content: `
           <div style="padding: 10px 20px;">
@@ -223,7 +223,12 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             </tbody>
           </table>
           </div>
-          `
+          `,
+          yes: function(index, layero){
+            //do something
+            console.log(1111);
+            layer.close(index); //如果设定了yes回调，需进行手工关闭
+          }
         });
 
         $('#searchCityName').bind('input propertychange', function() {
