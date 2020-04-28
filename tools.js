@@ -201,7 +201,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         layer.close(loadIndex);
         let quitSelect = '';
         res.list.map(item => {
-          quitSelect += `<tr><td><input type="checkbox" data-id="${item.id}"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
+          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="${item.id}"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
@@ -209,7 +209,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           area: ['800px', '500px'],
           content: `
           <div style="padding: 10px 20px;">
-          <div>搜索：<input type="text"></div>
+          <div>搜索：<input id="searchCityName" type="text" style="padding: 5px 10px" placeholder="请输入姓名搜索"></div>
           <table class="layui-table">
             <thead>
              <tr>
@@ -218,12 +218,29 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               <th>姓名</th>
              </tr>
             </thead>
-            <tbody>
+            <tbody id="userTable">
               ${quitSelect}
             </tbody>
           </table>
           </div>
           `
+        });
+
+        $('#searchCityName').bind('input propertychange', function() {
+          var searchCityName = $("#searchCityName").val();
+          if (searchCityName == "") {
+            $("#userTable tr").show();
+          } else {
+            $("#userTable tr").each(
+              function() {
+                var cityName = $(this).attr("data-user");
+                if (cityName.indexOf(searchCityName) != -1) {
+                  $(this).show();
+                } else {
+                  $(this).hide();
+                }
+              });
+          }
         });
       });
     });
