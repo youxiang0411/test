@@ -208,6 +208,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           type: 1,
           area: ['800px', '500px'],
           content: `
+          <div style="padding: 10px 20px;">
+          <div>搜索：<input type="text"></div>
           <table class="layui-table">
             <thead>
              <tr>
@@ -220,6 +222,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               ${quitSelect}
             </tbody>
           </table>
+          </div>
           `
         });
       });
