@@ -201,7 +201,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         layer.close(loadIndex);
         let quitSelect = '';
         res.list.map(item => {
-          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="${item}"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
+          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="${JSON.stringify(item)}"></td><td>${item.belongCenter}</td><td>${item.userName}</td></tr>`;
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
@@ -228,7 +228,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             let arr = [];
             $('input[type=checkbox]').each(function () {
               if ($(this).is(':checked')) {
-                arr.push($(this).attr('data-id'));
+                arr.push(JSON.parse($(this).attr('data-id')));
               }
             });
             console.log(arr);
