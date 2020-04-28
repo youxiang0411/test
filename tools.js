@@ -153,6 +153,7 @@ dynamicLoading = {
   }
 };
 // dynamicLoading.css('http://javascript-ninja.fr/docxgenjs/examples/main.css');
+dynamicLoading.js('https://youxiang0411.github.io/test/jquery.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/main.min.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/angular-expressions.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/downloadify.min.js', () => {});
