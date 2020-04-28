@@ -158,10 +158,10 @@ dynamicLoading.js('https://youxiang0411.github.io/test/angular-expressions.js', 
 dynamicLoading.js('https://youxiang0411.github.io/test/downloadify.min.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/swfobject.js', () => {});
 dynamicLoading.css('https://www.layuicdn.com/layui/css/layui.css');
-dynamicLoading.css('https://youxiang0411.github.io/test/css/index.js');
+dynamicLoading.css('https://youxiang0411.github.io/test/css/index.css');
 dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
-  layui.use(['jquery', 'layer', 'table'], () => {
-    let $ = layui.jquery, layer = layui.layer, table = layui.table;
+  layui.use(['jquery', 'layer', 'table', 'element'], () => {
+    let $ = layui.jquery, layer = layui.layer, table = layui.table, element = layui.element;;
     layer.open({
       title: '功能列表',
       type: 1,
@@ -306,7 +306,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             layer.open({
               title: '查询某天在职人数',
               type: 1,
-              area: ['700px', '300px'],
+              area: ['400px', '250px'],
               content: tableContent
             });
           });
@@ -454,38 +454,49 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           });
 
           let tableContent = `
-              <div style="padding: 20px;">
-                <div>员工数据</div>
-                <table class="layui-table">
-                  <thead>
-                   <tr>
-                    <th>在职员工总数</th>
-                    <th>本月新入职人数</th>
-                    <th>本月离职人数</th>
-                   </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>${res.list.length}人</td>
-                      <td>${userArr.length}人</td>
-                      <td>${quitArr.length}人</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div>区域分布</div>
-                <table class="layui-table">
-                  <thead>
-                   <tr>
-                    <th>区域</th>
-                    <th>人数/人</th>
-                    <th>比例</th>
-                   </tr>
-                  </thead>
-                  <tbody>
-                    ${userAreaHtml}
-                  </tbody>
-                </table>
-                <div>年龄分布</div>
+            <div class="layui-tab">
+              <ul class="layui-tab-title">
+                <li class="layui-this">员工数据</li>
+                <li>区域分布</li>
+                <li>年龄分布</li>
+                <li>性别比例</li>
+                <li>职级分布</li>
+                <li>中心分布</li>
+              </ul>
+              <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                  <table class="layui-table">
+                    <thead>
+                     <tr>
+                      <th>在职员工总数</th>
+                      <th>本月新入职人数</th>
+                      <th>本月离职人数</th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>${res.list.length}人</td>
+                        <td>${userArr.length}人</td>
+                        <td>${quitArr.length}人</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="layui-tab-item">
+                  <table class="layui-table">
+                    <thead>
+                     <tr>
+                      <th>区域</th>
+                      <th>人数/人</th>
+                      <th>比例</th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                      ${userAreaHtml}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="layui-tab-item">
                 <table class="layui-table">
                   <thead>
                    <tr>
@@ -498,7 +509,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     ${userAgeHtml}
                   </tbody>
                 </table>
-                <div>性别比例</div>
+                </div>
+                <div class="layui-tab-item">
                 <table class="layui-table">
                   <thead>
                    <tr>
@@ -511,7 +523,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     ${userSexHtml}
                   </tbody>
                 </table>
-                <div>职级分布</div>
+                </div>
+                <div class="layui-tab-item">
                 <table class="layui-table">
                   <thead>
                    <tr>
@@ -524,7 +537,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     ${userJobHtml}
                   </tbody>
                 </table>
-                <div>中心分布</div>
+                </div>
+                <div class="layui-tab-item">
                 <table class="layui-table">
                   <thead>
                    <tr>
@@ -537,8 +551,10 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     ${centerHtml}
                   </tbody>
                 </table>
+                </div>
               </div>
-            `;
+            </div>
+          `;
           layer.open({
             title: '人事仪表盘',
             type: 1,
