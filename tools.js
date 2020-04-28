@@ -201,7 +201,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         layer.close(loadIndex);
         let quitSelect = [];
         res.list.map(item => {
-          quitSelect.push(`<tr><input type="checkbox" data-id="${item.id}"><td>${item.belongCenter}</td>${item.userName}<td></td></tr>`);
+          quitSelect.push(`<tr><td><input type="checkbox" data-id="${item.id}"></td><td>${item.belongCenter}</td>${item.userName}<td></td></tr>`);
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
@@ -211,6 +211,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           <table class="layui-table">
             <thead>
              <tr>
+              <th>是否选择</th>
               <th>中心名称</th>
               <th>姓名</th>
              </tr>
