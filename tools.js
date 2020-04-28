@@ -158,8 +158,8 @@ dynamicLoading.js('https://youxiang0411.github.io/test/main.min.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/angular-expressions.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/downloadify.min.js', () => {});
 dynamicLoading.js('https://youxiang0411.github.io/test/swfobject.js', () => {});
-dynamicLoading.css('https://youxiang0411.github.io/test/select/select.css', () => {});
-dynamicLoading.js('https://youxiang0411.github.io/test/select/select.js', () => {});
+dynamicLoading.css('https://youxiang0411.github.io/test/UCFORM.css', () => {});
+dynamicLoading.js('https://youxiang0411.github.io/test/jQuery.UCSelect.js', () => {});
 dynamicLoading.css('https://www.layuicdn.com/layui/css/layui.css');
 dynamicLoading.css('https://youxiang0411.github.io/test/css/index.css?v=' + new Date().getTime());
 dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
@@ -209,15 +209,11 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         layer.open({
           title: '请选择人员（支持多选下载）',
           content: `
-          <div id="demo2" class="selectPickerWrapper">
-            <select class="hidden" multiple="multiple">
-              ${quitSelect.join("")}
-            </select>
-          </div>
+          <div><select id="userList">${quitSelect.join("")}</select></div>
         `
         });
         $(function() {
-          $("#demo2").mySelect();
+          $("#userList").UCFormSelect();
         });
       });
     });
