@@ -454,7 +454,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           });
 
           let tableContent = `
-            <div class="layui-tab layui-tab-brief">
+            <div class="layui-tab layui-tab-brief" style="padding: 0 20px;">
               <ul class="layui-tab-title">
                 <li class="layui-this">员工数据</li>
                 <li>区域分布</li>
