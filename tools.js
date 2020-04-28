@@ -169,7 +169,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
       content:
         `
           <div class="app-list">
-            <div id="downloadQuit" class="app-list-item">
+            <div id="downloadQuit1" class="app-list-item">
               <div class="app-list-item-content">
                 <span>1、下载离职证明</span>
               </div>
