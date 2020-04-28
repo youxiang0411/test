@@ -24,21 +24,30 @@
     border-bottom: 2px solid #3654ea !important;
 }
 
-.layui-layer .layui-layer-content .app-list {}
+.layui-layer .layui-layer-content .app-list {
+    padding: 10px;
+}
 .layui-layer .layui-layer-content .app-list .app-list-item {
-    padding: 8px 15px;
+    padding: 5px;
+    margin-bottom: 10px;
     cursor: pointer;
+    background: #fff;
+    color: #303133;
+    border: 1px solid #ebeef5;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.06);
 }
 .layui-layer .layui-layer-content .app-list .app-list-item:hover {
+    color: #3654ea;
     background-color: rgba(255, 255, 255, 0.1);
 }
 .layui-layer .layui-layer-content .app-list .app-list-item .app-list-item-content {
     display: flex;
     align-items: center;
-    height: 68px;
+    height: 38px;
     padding: 15px;
-    font-size: 16px;
-    line-height: 48px;
+    font-size: 14px;
+    line-height: 18px;
     background-color: white;
     border-radius: 5px;
     box-sizing: border-box;

@@ -162,17 +162,6 @@ dynamicLoading.css('https://youxiang0411.github.io/test/css/index.css?v=' + new 
 dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
   layui.use(['jquery', 'layer', 'table', 'element'], () => {
     let $ = layui.jquery, layer = layui.layer, table = layui.table, element = layui.element;
-    // layer.open({
-    //   title: '全部应用',
-    //   type: 1,
-    //   area: ['300px', '300px'],
-    //   content:
-    //     `
-    //    <div style="padding: 20px;">
-    //      <button id="downloadQuit" type="button" class="layui-btn layui-btn-primary layui-btn-fluid">1、下载离职证明</button><button id="totalList" type="button" class="layui-btn layui-btn-primary layui-btn-fluid">2、查询某天在职人数</button><button id="dashboard" type="button" class="layui-btn layui-btn-primary layui-btn-fluid">3、人事仪表盘</button>
-    //    </div>
-    //   `
-    // });
     layer.open({
       title: '全部应用',
       type: 1,
@@ -182,19 +171,16 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           <div class="app-list">
             <div id="downloadQuit" class="app-list-item">
               <div class="app-list-item-content">
-                <img :src="item.icon" alt="">
                 <span>1、下载离职证明</span>
               </div>
             </div>
             <div id="totalList" class="app-list-item">
               <div class="app-list-item-content">
-                <img :src="item.icon" alt="">
                 <span>2、查询某天在职人数</span>
               </div>
             </div>
             <div id="dashboard" class="app-list-item">
               <div class="app-list-item-content">
-                <img :src="item.icon" alt="">
                 <span>3、人事仪表盘</span>
               </div>
             </div>
