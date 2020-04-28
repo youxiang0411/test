@@ -285,7 +285,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                   let elink = document.createElement("a");
                   elink.download = userName + '的离职证明.docx';
                   elink.style.display = "none";
-                  elink.href = URL.createObjectURL(result);
+                  elink.href = URL.createObjectURL('data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result);
                   document.body.appendChild(elink);
                   elink.click();
                   URL.revokeObjectURL(elink.href); // 释放URL 对象
