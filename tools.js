@@ -12,7 +12,7 @@ function buildParamsStr(paramsObj) {
   }
   return str.slice(1);
 }
-function ajax_method(url, data, method, success, async = true) {
+function ajax_method(url, data, method, success) {
   url = '/djintelligent' + url;
   var ajax = new XMLHttpRequest();
   if (method === 'get') {
@@ -20,10 +20,10 @@ function ajax_method(url, data, method, success, async = true) {
       var paramsStr = buildParamsStr(data);
       url = addURLParams(url, paramsStr);
     }
-    ajax.open(method, url, async);
+    ajax.open(method, url);
     ajax.send();
   } else {
-    ajax.open(method, url, async);
+    ajax.open(method, url);
     ajax.setRequestHeader("Content-type", "application/json;charset=UTF-8");
     if (data) {
       ajax.send(JSON.stringify(data));
@@ -282,9 +282,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                   link.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
                   link.download = userName + '的离职证明.docx';
                   link.click();
-                  link.remove();
                 });
-              }, false);
+              });
             });
             layer.close(index); //如果设定了yes回调，需进行手工关闭
           }
