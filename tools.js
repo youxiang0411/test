@@ -192,23 +192,33 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
     });
     // 1、下载离职证明
     $('#downloadQuit').on('click', () => {
-      $(function() {
-        $("#demo2").mySelect();
+      let loadIndex = layer.load(1, {
+        shade: [0.1,'#fff'] //0.1透明度的白色背景
       });
-      layer.open({
-        title: '请选择人员（支持多选下载）',
-        content: `
+      ajax_method('/djorg/getQuitUserList.do', {
+        quitStartTime: '',
+        quitEndTime: '',
+        pageSize: 50000,
+        page: 1
+      }, 'get', function (res) {
+        layer.close(loadIndex);
+        let quitSelect = [];
+        res.list.map(item => {
+          quitSelect.push(`<option value="${item.id}">${item.userName}</option>`);
+        });
+        layer.open({
+          title: '请选择人员（支持多选下载）',
+          content: `
           <div id="demo2" class="selectPickerWrapper">
             <select class="hidden" multiple="multiple">
-              <option>1111</option>
-              <option>222</option>
-              <option>333</option>
-              <option>444</option>
-              <option>555</option>
-              <option>666</option>
+              ${quitSelect.join("")}
             </select>
           </div>
         `
+        });
+        $(function() {
+          $("#demo2").mySelect();
+        });
       });
     });
     // 1、下载离职证明
