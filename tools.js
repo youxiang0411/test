@@ -327,7 +327,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                       document.body.removeChild(elink);
                     });
                   });
-                }, i * 3000);
+                }, index * 2000);
               })(item, index);
             });
             layer.close(index); //如果设定了yes回调，需进行手工关闭
