@@ -250,44 +250,6 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               }
             });
             console.log(arr);
-            // arr.forEach(item => {
-            //   let {userName, position, entryTime, quitTime, sex} = item;
-            //   entryTime = entryTime.split('-');
-            //   quitTime = quitTime.split('-');
-            //   ajax_method('/djorg/getUserPersonInfo.do', {
-            //     id: item.id
-            //   }, 'get', function (user) {
-            //     let {idCard} = user;
-            //     new DocxGen().loadFromFile(
-            //       'https://youxiang0411.github.io/test/离职证明.docx',
-            //       {async: true}
-            //     ).success(doc => {
-            //       doc.setTags(
-            //         {
-            //           userName: userName || '  ',
-            //           sex: (sex === '女' ? '女士' : (sex === '男'? '先生' : '')),
-            //           idCard: idCard || '  ',
-            //           position: position || '  ',
-            //           entryTime_1: entryTime[0] || '  ',
-            //           entryTime_2: entryTime[1] || '  ',
-            //           entryTime_3: entryTime[2] || '  ',
-            //           quitTime_1: quitTime[0] || '  ',
-            //           quitTime_2: quitTime[1] || '  ',
-            //           quitTime_3: quitTime[2] || '  ',
-            //         }
-            //       );
-            //       doc.applyTags();
-            //       let result = doc.output({download: false});
-            //       let elink = document.createElement("a");
-            //       elink.download = userName + '的离职证明.docx';
-            //       elink.style.display = "none";
-            //       elink.href = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + result;
-            //       document.body.appendChild(elink);
-            //       elink.click();
-            //       document.body.removeChild(elink);
-            //     });
-            //   });
-            // });
             arr.forEach((item, index) => {
               (function (item, index) {
                 setTimeout(function () {
@@ -347,7 +309,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         });
 
         $('#searchCityName').bind('input propertychange', function() {
-          var searchCityName = $("#searchCityName").val();
+          var searchCityName = $("#searchCityName").val().trim();
           if (searchCityName == "") {
             $("#userTable tr").show();
           } else {
