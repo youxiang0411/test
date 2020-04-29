@@ -390,7 +390,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         }, 'get', function (res) {
           ajax_method('/djorg/getQuitUserList.do', {
             quitStartTime: entryTime.split(' ')[0],
-            quitEndTime: entryTime.split(' ')[0],
+            quitEndTime: dateFormat('YYYY-mm-dd', new Date()),
             pageSize: 50000,
             page: 1
           }, 'get', function (quit) {
@@ -429,15 +429,15 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                   </colgroup>
                   <tbody>
                     <tr>
-                      <td>总在职人数</td>
+                      <td>在职人数</td>
                       <td>${userArr.length}人</td>
                     </tr>
                     <tr>
-                      <td>当天离职人数</td>
+                      <td>已离职人数</td>
                       <td>${quitArr.length}人</td>
                     </tr>
                     <tr>
-                      <td>总计</td>
+                      <td>${entryTime.split(' ')[0]}的在职人数总计</td>
                       <td>${userArr.length + quitArr.length}人</td>
                     </tr>
                   </tbody>
