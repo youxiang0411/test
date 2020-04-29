@@ -401,7 +401,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             quit.list = quit.list.filter(item => !blacklist.includes(item.id)).filter(k => !blackDepart.includes(k.belongCenter));
             var quitArr = [];
             quit.list.map(item => {
-              if (new Date(item.quitTime).getTime() < new Date(entryTime).getTime()) {
+              // quitTime
+              if (new Date(item.entryTime).getTime() < new Date(entryTime).getTime()) {
                 quitArr.push(item)
               }
             });
