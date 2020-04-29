@@ -249,7 +249,10 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 }
               }
             });
-            console.log(arr);
+            if (!arr.length) {
+              layer.msg('请选择人员');
+              return;
+            }
             arr.forEach((item, index) => {
               (function (item, index) {
                 setTimeout(function () {
