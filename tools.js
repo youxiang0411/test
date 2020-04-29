@@ -215,7 +215,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
         let quitSelect = '';
         let quitUserList = res.list;
         res.list.map(item => {
-          quitSelect += `<tr data-user="${item.userName}"><td><input type="checkbox" data-id="${item.id}"></td><td>${item.belongCenter}</td><td>${item.userName}</td><td>${item.quitTime}</td></tr>`;
+          quitSelect += `<tr data-user="${item.userName}"><td><input name="selectUserId" type="checkbox" data-id="${item.id}"></td><td>${item.belongCenter}</td><td>${item.userName}</td><td>${item.quitTime}</td></tr>`;
         });
         layer.open({
           title: '请选择人员（支持多选下载）',
@@ -227,7 +227,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           <table class="layui-table">
             <thead>
              <tr>
-              <th>是否选择</th>
+              <th><input id="selectAll" type="checkbox"></th>
               <th>中心名称</th>
               <th>姓名</th>
               <th>离职时间</th>
@@ -293,6 +293,18 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
               });
             });
             layer.close(index); //如果设定了yes回调，需进行手工关闭
+          }
+        });
+
+        $('#selectAll').on('click', function () {
+          if ($(this).prop('checked')) {
+            $('[name=selectUserId]').each(function () {
+              $(this).prop('checked',true);
+            });
+          } else {
+            $('[name=selectUserId]').each(function () {
+              $(this).prop('checked',false);
+            });
           }
         });
 
