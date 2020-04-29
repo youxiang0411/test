@@ -251,7 +251,7 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             });
             if (!arr.length) {
               layer.msg('请选择人员');
-              return;
+              return false;
             }
             arr.forEach((item, index) => {
               (function (item, index) {
