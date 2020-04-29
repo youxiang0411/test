@@ -424,21 +424,17 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
             let tableContent = `
               <div style="padding: 10px 20px;">
                 <table class="layui-table">
-                   <colgroup>
-                    <col width="150">
-                    <col>
-                  </colgroup>
                   <tbody>
                     <tr>
                       <td>在职人数</td>
                       <td>${userArr.length}人</td>
                     </tr>
                     <tr>
-                      <td>已离职人数</td>
+                      <td>已离职</td>
                       <td>${quitArr.length}人</td>
                     </tr>
                     <tr>
-                      <td>${entryTime.split(' ')[0]}的在职人数总计</td>
+                      <td>${entryTime.split(' ')[0]}在职人数总计</td>
                       <td>${userArr.length + quitArr.length}人</td>
                     </tr>
                   </tbody>
