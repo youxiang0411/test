@@ -117,7 +117,7 @@ function getAge(strAge) {
   }
 }
 // 黑名单用户
-let blacklist = [
+blacklist = [
   '96d66733a3794deb827d85b0b0f9b1c5',// 研发总监
   '25594b7051534a1faab69a86e8fb9fe9',// 审计委员会
   '547d685078794b8fae9df5506e43ce60',// 东东
@@ -126,7 +126,7 @@ let blacklist = [
   '80dc5bd9c47e42f7b2f81e40a8b18558',// 总裁室
 ];
 // 黑名单部门
-let blackDepart = [
+blackDepart = [
   '苍南分公司（行政）',// 苍南分公司（行政）
 ];
 // 动态加载js,css
