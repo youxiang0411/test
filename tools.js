@@ -437,11 +437,11 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 <table class="layui-table">
                   <tbody>
                     <tr>
-                      <td>在职人数</td>
+                      <td>花名册在职人数</td>
                       <td>${userArr.length}人</td>
                     </tr>
                     <tr>
-                      <td>已离职</td>
+                      <td>已离职人数</td>
                       <td>${quitArr.length}人</td>
                     </tr>
                     <tr>
