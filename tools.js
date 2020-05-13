@@ -249,6 +249,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                 }
               }
             });
+            let nowDate = dateFormat('YYYY-mm-dd', new Date());
+            nowDate = nowDate.split('-');
             arr.forEach((item, index) => {
               (function (item, index) {
                 setTimeout(function () {
@@ -275,6 +277,9 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                           quitTime_1: quitTime[0] || '  ',
                           quitTime_2: quitTime[1] || '  ',
                           quitTime_3: quitTime[2] || '  ',
+                          nowDate_1: nowDate[0] || '  ',
+                          nowDate_2: nowDate[1] || '  ',
+                          nowDate_3: nowDate[2] || '  ',
                         }
                       );
                       doc.applyTags();
@@ -340,6 +345,8 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
           pageSize: 50,
           page: 1
         }, 'get', function (res) {
+          let nowDate = dateFormat('YYYY-mm-dd', new Date());
+          nowDate = nowDate.split('-');
           if (res.list.length) {
             let {userName, position, entryTime, quitTime, sex} = res.list[0];
             entryTime = entryTime.split('-');
@@ -364,6 +371,9 @@ dynamicLoading.js('https://www.layuicdn.com/layui/layui.js', () => {
                     quitTime_1: quitTime[0] || '  ',
                     quitTime_2: quitTime[1] || '  ',
                     quitTime_3: quitTime[2] || '  ',
+                    nowDate_1: nowDate[0] || '  ',
+                    nowDate_2: nowDate[1] || '  ',
+                    nowDate_3: nowDate[2] || '  ',
                   }
                 );
                 doc.applyTags();
